@@ -56,6 +56,7 @@
                                 </form>
                     </div>
                     <div>
+                       <% if(walls != null) {%>
                         <table>
                         <%
                         
@@ -67,10 +68,14 @@
                         <tr>
                             <td><%=wallItem.getUserName()%></td>
                             <td><%=wallItem.getStatus()%></td>
-                            
+                            <%if(wallItem.getNoOfLike()!=0){ %>
+                            <td>Likes: <%=wallItem.getNoOfLike()%></td>
+                            <%}%>
+                            <td><a href="UserOperationServlet?op=Like&uid=<%=wallItem.getUserId()%>&sid=<%=wallItem.getStatusid()%>">Like It</a></td>
                         </tr>
                         <%
                         }
+                       }
                         %>
                         </table>
                     </div>>

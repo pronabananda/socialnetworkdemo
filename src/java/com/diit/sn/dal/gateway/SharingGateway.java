@@ -31,7 +31,7 @@ public class SharingGateway {
     public int saveStatus(int userId, String status) {
 
         System.out.println("Saving Status of regId:" + userId);
-        String insertStatus = "insert into user_status(id, status,time) values(?,?,now())";
+        String insertStatus = "insert into user_status(id, status,time,like_no) values(?,?,now(),0)";
 
         int returnFlag = 0;
 
@@ -59,7 +59,7 @@ public class SharingGateway {
         try {
             statement = conn.createStatement();
 
-            rslSet = statement.executeQuery("Select us.sl,us.Id,concat(u.lastname,' ',u.firstname) name,us.status FROM user_status us,users u where us.id="+userId+" and us.id=u.id order by time desc"); // conn.commit();
+            rslSet = statement.executeQuery("Select us.sl,us.Id,concat(u.lastname,' ',u.firstname) name,us.status, us.like_no FROM user_status us,users u where us.id="+userId+" and us.id=u.id order by time desc"); // conn.commit();
             while (rslSet.next()) {
                 wallItem = new WallItem();
                 System.out.println("Inside Retrieving ResultSet");
@@ -67,6 +67,7 @@ public class SharingGateway {
                 wallItem.setUserId(rslSet.getInt("id"));
                 wallItem.setStatus(rslSet.getString("status"));
                 wallItem.setUserName(rslSet.getString("name"));
+                wallItem.setNoOfLike(rslSet.getInt("like_no"));
                 listWalls.add(wallItem);
               
             }
@@ -76,6 +77,22 @@ public class SharingGateway {
         } finally {
             System.out.println("After retrieving Status:"+listWalls.size() );
             return listWalls;
+        }
+    }
+    
+    public int addLike(String uid, String sid){
+    conn = ConnectionHandler.connect();
+    int returnVal=9;
+     try {
+            statement = conn.createStatement();
+            returnVal = statement.executeUpdate("update user_status set like_no=like_no+1 where sl="+sid); // conn.commit();
+            conn.close();
+            returnVal=0;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        } finally {
+            
+            return returnVal;
         }
     }
 }

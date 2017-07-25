@@ -61,7 +61,29 @@ public class UserOperationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+         String path = request.getContextPath();
+        String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+        String serialNo = null;
+        String url = "";
+        SharingGateway sharingGateway= new SharingGateway();
+         HttpSession userSession = request.getSession();
+        if(request.getParameter("op").equals("Like")){
+            sharingGateway.addLike(request.getParameter("uid"),request.getParameter("sid"));
+            System.out.println("addling like for uid:"+request.getParameter("uid")+"sid: "+request.getParameter("sid"));
+            }
+       
+            //    userGateway.getRegId(request.getParameter("loginId").toString());
+
+        String regId = (String) request.getParameter("uid");
+
+        userSession.setAttribute("walls", sharingGateway.getWalls(regId));
+
+//            url = basePath + "/message.jsp?messageToDisplay=You have been registered successfully.";
+//            response.sendRedirect(url);
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/home.jsp");
+        dispatcher.forward(request, response);
+        
     }
 
     /**
@@ -87,6 +109,7 @@ public class UserOperationServlet extends HttpServlet {
         String regId = (String) userSession.getAttribute("regId");
         String status=(String)request.getParameter("txtStatus");
         System.out.println(regId+ " :"+status);
+      //  if(regId !=null)
         sharingGateway.saveStatus(Integer.parseInt(regId),status);
         userSession.setAttribute("walls", sharingGateway.getWalls(regId));
 
