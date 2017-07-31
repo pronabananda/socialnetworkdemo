@@ -4,6 +4,7 @@
     Author     : paul
 --%>
 
+<%@page import="com.diit.sn.dao.RegistrationInfo"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -26,16 +27,21 @@
                 if (walls != null){
                 System.out.println("Wall Items No: "+walls.size());
                 }
+                RegistrationInfo registrationInfo= new RegistrationInfo();
+                registrationInfo= (RegistrationInfo)userSession.getAttribute("registrationInfo");
+                
                 %>
         <h1>Home Page</h1>
              <div class="center_flexible_content">
                         <h3>Photo</h3>
   
                         <img class="uploadimages" src="<%= basePath%>/PhotoServlet?regNo=<%=regId%>" alt="Picture" width="180" height="180" />
-
-                    </div><br />
+<h3 style="text-align: right"><a href="UserOperationServlet?op=addFriend&frndId=<%=registrationInfo.getMemberId()%>">Add Friend</a>
+                    </div>
+                        <a >
+                        <br />
                     <div>
-                         <form name='aspnetForm' method='post' action='UserOperationServlet' id='aspnetForm' >
+<!--                         <form name='aspnetForm' method='post' action='UserOperationServlet' id='aspnetForm' >
                         <table>
                             <tr>
                          <td class="td_left labelwrap">
@@ -53,7 +59,18 @@
                             </tr>
                             
                             <table>
-                                </form>
+                                </form>-->
+                    </div>
+                    <div>
+                        <table>
+                            <tr><td>Name</td><td><%=registrationInfo.getFirstName()+" "+ registrationInfo.getLastName()%></td></tr>
+                            <tr><td>email</td><td><%=registrationInfo.getEmailId() %></td></tr>
+                            <tr><td>Contact No:</td><td><%=registrationInfo.getContactNo() %></td></tr>
+                            <tr><td>Country</td><td><%=registrationInfo.getCountryName() %></td></tr>
+                            <tr><td></td><td></td></tr>
+                            
+                        </table>
+                        
                     </div>
                     <div>
                        <% if(walls != null) {%>
@@ -78,6 +95,6 @@
                        }
                         %>
                         </table>
-                    </div>>
+                    </div>
     </body>
 </html>
