@@ -33,6 +33,7 @@ public class RegistrationGateway {
 
         String errorPosition = "PINFOERR";
         int registrationId = 0;
+        System.out.println("Save Application :registrationInfo:"+registrationInfo.toString());
 //        System.out.println("imageInfo:" + imageInfo.toString());
 //
 //        File fBlob = new File(imageInfo.getImagePath() + "/" + imageInfo.getAppPicName());
@@ -48,17 +49,18 @@ public class RegistrationGateway {
         try {
             conn = ConnectionHandler.connect();
             conn.setAutoCommit(false);
-            cs = conn.prepareCall("{call SocialNetworkDemo.user_reg(?,?,?,?,?,?)}");
+            cs = conn.prepareCall("{call SocialNetworkDemo.user_reg(?,?,?,?,?,?,?)}");    
             cs.setString(1, registrationInfo.getFirstName());
             cs.setString(2, registrationInfo.getLastName());
             //  cs.setString(3, registrationInfo.getDateOfBirth());
             cs.setString(3, registrationInfo.getEmailId());
             cs.setString(4, registrationInfo.getContactNo());
             cs.setString(5, registrationInfo.getCountryName());
-            cs.registerOutParameter(6, 12);
+            cs.setString(6, registrationInfo.getPassword());
+            cs.registerOutParameter(7, 12);
             System.out.println("PersonalInfo assinged to procedure call successfully.");
             cs.execute();
-            registrationId = Integer.parseInt(cs.getString(6));
+            registrationId = Integer.parseInt(cs.getString(7));
     
             System.out.println("PROCEDURE PersonalInfo_Save executed successfully.");
             System.out.println((new StringBuilder()).append("SerialNo has been generated: ").append(applicationID).toString());

@@ -69,9 +69,9 @@ public class UserProfile extends HttpServlet {
         int regID = userGateway.getRegId(request.getParameter("email"));
         RegistrationInfo registrationInfo= new RegistrationInfo();
         registrationInfo=userGateway.getProfileInfo(request.getParameter("email"));
-        session.setAttribute("walls", sharingGateway.getWalls(regID+""));
+        session.setAttribute("walls", sharingGateway.getWalls(regID+"","OWNONLY"));
         
-        session.setAttribute("regId", regID + "");
+       // session.setAttribute("regId", regID + "");
         session.setAttribute("registrationInfo", registrationInfo);
 
 //            url = basePath + "/message.jsp?messageToDisplay=You have been registered successfully.";

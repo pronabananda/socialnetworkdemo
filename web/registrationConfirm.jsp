@@ -26,7 +26,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="datetimepicker_css.js"></script>
         <script type="text/javascript" src="ajaxjs.js"></script>
-        <title>Registration Confirmation</title>
+        <title>Registration Confirmation: Social Networking Demo</title>
     </head>
 
     <body>
@@ -82,7 +82,10 @@
                             }
                             if (name.equals("ddlCountry")) {
                                 registrationInfo.setCountryName(value.trim());
-                            } 
+                            }
+                           if (name.equals("txtPassword")) {
+                                registrationInfo.setPassword(value.trim());
+                            }
                         }
                             else {
 

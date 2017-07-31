@@ -6,6 +6,7 @@
 
 package com.diit.sn.servlet;
 
+import com.diit.sn.dal.gateway.SharingGateway;
 import com.diit.sn.dal.gateway.UserGateway;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -74,20 +75,28 @@ public class login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         System.out.println("insdie doPost of Login Servlet");
         String path = request.getContextPath();
         String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
         String serialNo = null;
         String url = "";
-        UserGateway userGateway= new UserGateway();
+        UserGateway userGateway;
+         userGateway= new UserGateway();
         System.out.println(request.getParameter("loginId").toString()+request.getParameter("txtPassword").toString());
         if(request.getParameter("txtPassword").toString().equals(userGateway.getPassword(request.getParameter("loginId").toString()))){
             System.out.println("Autheticated");
-            HttpSession session = request.getSession(true);
+            //HttpSession session = request.getSession(true);
+            HttpSession userSession = request.getSession(true);
+           
             userGateway.getRegId(request.getParameter("loginId").toString());
             int regID=userGateway.getRegId(request.getParameter("loginId"));
-            session.setAttribute("regId",regID+"");
+            System.out.println("userSession.setAttribute(\"regId\",regID+\"\")"+regID);
+            userSession.setAttribute("regId",regID+"");
             
+            
+            SharingGateway sharingGateway= new SharingGateway();
+            userSession.setAttribute("walls", sharingGateway.getWalls(regID+"","ALL"));
 //            url = basePath + "/message.jsp?messageToDisplay=You have been registered successfully.";
 //            response.sendRedirect(url);
          

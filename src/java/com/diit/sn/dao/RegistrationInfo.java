@@ -20,6 +20,7 @@ public class RegistrationInfo {
     private String countryName;
     private String emailId;
     private String contactNo;
+    private String password;
 
     public RegistrationInfo(String firstName, String lastName, String dateOfBirth, String countryName, String emailId, String contactNo) {
         this.firstName = firstName;
@@ -33,6 +34,7 @@ public class RegistrationInfo {
     public RegistrationInfo() {
     }
 
+    
     
     public String getMemberId() {
         return memberId;
@@ -90,6 +92,15 @@ public class RegistrationInfo {
         this.contactNo = contactNo;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    
     @Override
     public String toString() {
         return "RegistrationInfo{" + "memberId=" + memberId + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", countryName=" + countryName + ", emailId=" + emailId + ", contactNo=" + contactNo + '}';

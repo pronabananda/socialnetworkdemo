@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Social Network</title>
+        <title>Social Networking Demo</title>
     </head>
     <body>
         <h1>Social Network Demo</h1>

@@ -20,6 +20,10 @@
         <servlet-name>UserOperationServlet</servlet-name>
         <servlet-class>com.diit.sn.servlet.UserOperationServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserProfile</servlet-name>
+        <servlet-class>com.diit.sn.servlet.UserProfile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>registration</servlet-name>
         <url-pattern>/registration</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>UserOperationServlet</servlet-name>
         <url-pattern>/UserOperationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserProfile</servlet-name>
+        <url-pattern>/UserProfile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

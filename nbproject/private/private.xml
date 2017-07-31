@@ -3,9 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/paul/Desktop/Projects_20072017/DIIT/ddop/SN/src/java/com/diit/sn/servlet/UserOperationServlet.java</file>
-            <file>file:/home/paul/Desktop/Projects_20072017/DIIT/ddop/SN/src/java/com/diit/sn/dal/gateway/SharingGateway.java</file>
-            <file>file:/home/paul/Desktop/Projects_20072017/DIIT/ddop/SN/web/home.jsp</file>
+            <file>file:/mnt/E4E46360E4633448/PauLab/github/SN/src/java/com/diit/sn/dal/gateway/SharingGateway.java</file>
+            <file>file:/mnt/E4E46360E4633448/PauLab/github/SN/src/java/com/diit/sn/dao/RegistrationInfo.java</file>
+            <file>file:/mnt/E4E46360E4633448/PauLab/github/SN/web/home.jsp</file>
+            <file>file:/mnt/E4E46360E4633448/PauLab/github/SN/web/index.jsp</file>
+            <file>file:/mnt/E4E46360E4633448/PauLab/github/SN/src/java/com/diit/sn/servlet/registration.java</file>
+            <file>file:/mnt/E4E46360E4633448/PauLab/github/SN/web/registration.jsp</file>
+            <file>file:/mnt/E4E46360E4633448/PauLab/github/SN/web/registrationConfirm.jsp</file>
+            <file>file:/mnt/E4E46360E4633448/PauLab/github/SN/src/java/com/diit/sn/servlet/UserOperationServlet.java</file>
+            <file>file:/mnt/E4E46360E4633448/PauLab/github/SN/src/java/com/diit/sn/dal/gateway/UserGateway.java</file>
+            <file>file:/mnt/E4E46360E4633448/PauLab/github/SN/src/java/com/diit/sn/servlet/login.java</file>
+            <file>file:/mnt/E4E46360E4633448/PauLab/github/SN/src/java/com/diit/sn/dal/gateway/RegistrationGateway.java</file>
         </group>
     </open-files>
 </project-private>

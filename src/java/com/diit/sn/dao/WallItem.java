@@ -16,6 +16,7 @@ public class WallItem {
     private int userId;
     private String status;
     private int noOfLike;
+    private int noOfDislike;
 
     public int getStatusid() {
         return statusid;
@@ -56,6 +57,14 @@ public class WallItem {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public int getNoOfDislike() {
+        return noOfDislike;
+    }
+
+    public void setNoOfDislike(int noOfDislike) {
+        this.noOfDislike = noOfDislike;
     }
 
     

@@ -26,7 +26,7 @@ public class ConnectionHandler {
     private static final String user = "root";
 //    private static final String serverName = "10.76.12.101";
     private static final String serverName = "localhost";
-    private static final String password = "mukunda";
+    private static final String password = "123456";
 //    private static final String serverName = "localhost";
 //    private static final String password = "mukunda";
     private static final String databaseName = "SocialNetworkDemo";

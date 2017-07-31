@@ -52,14 +52,21 @@ public class SharingGateway {
         }
     }
 
-    public List<WallItem> getWalls(String userId) {
+    public List<WallItem> getWalls(String userId, String type) {
+        System.out.println("retrieving status of :"+userId);
         conn = ConnectionHandler.connect();
         List<WallItem> listWalls = new ArrayList<WallItem>();
          WallItem wallItem;
         try {
             statement = conn.createStatement();
 
-            rslSet = statement.executeQuery("Select us.sl,us.Id,concat(u.lastname,' ',u.firstname) name,us.status, us.like_no FROM user_status us,users u where us.id="+userId+" and us.id=u.id order by time desc"); // conn.commit();
+  if(type.equals("OWNONLY")){
+            rslSet = statement.executeQuery("Select us.sl,us.Id,concat(u.lastname,' ',u.firstname) name,us.status, us.like_no,us.dislike_no FROM user_status us,users u where us.id="+userId+" and us.id=u.id order by time desc"); // conn.commit();
+  }else{
+            rslSet = statement.executeQuery("Select us.sl,us.Id,concat(u.lastname,' ',u.firstname) name,us.status, \n" +
+"us.like_no,us.dislike_no FROM user_status us,users u\n" +
+" where (us.id="+userId+" or us.id in (Select friend_id from friend_linkage where id="+userId+" )) and us.id=u.id order by time desc");
+  }      
             while (rslSet.next()) {
                 wallItem = new WallItem();
                 System.out.println("Inside Retrieving ResultSet");
@@ -68,6 +75,7 @@ public class SharingGateway {
                 wallItem.setStatus(rslSet.getString("status"));
                 wallItem.setUserName(rslSet.getString("name"));
                 wallItem.setNoOfLike(rslSet.getInt("like_no"));
+                wallItem.setNoOfDislike(rslSet.getInt("dislike_no"));
                 listWalls.add(wallItem);
               
             }
@@ -86,6 +94,22 @@ public class SharingGateway {
      try {
             statement = conn.createStatement();
             returnVal = statement.executeUpdate("update user_status set like_no=like_no+1 where sl="+sid); // conn.commit();
+            conn.close();
+            returnVal=0;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        } finally {
+            
+            return returnVal;
+        }
+    }
+    
+       public int addDisLike(String uid, String sid){
+    conn = ConnectionHandler.connect();
+    int returnVal=9;
+     try {
+            statement = conn.createStatement();
+            returnVal = statement.executeUpdate("update user_status set dislike_no=dislike_no+1 where sl="+sid); // conn.commit();
             conn.close();
             returnVal=0;
         } catch (SQLException e) {

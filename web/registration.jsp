@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="datetimepicker_css.js"></script>
         <script type="text/javascript" src="ajaxjs.js"></script>
-        <title>Registration</title>
+        <title>Registration: Social Networking Demo</title>
     </head>
     <%
         String path = request.getContextPath();
@@ -82,6 +82,12 @@
                             <option value="England">England</option>
                         </select> 
                     </td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td>:</td>
+                    <td><input class="txt2" name="txtPassword" type="password" maxlength="50" required id="txtPassword" onBlur="changBackColor(this);"/></td>
+                </tr>
                
             </table>
             

@@ -67,29 +67,42 @@ public class UserOperationServlet extends HttpServlet {
 //        processRequest(request, response);
          String path = request.getContextPath();
          UserGateway userGateway= new UserGateway();
+         HttpSession userSession= request.getSession();
         String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
         String serialNo = null;
         String url = "";
         SharingGateway sharingGateway= new SharingGateway();
-         HttpSession userSession = request.getSession();
+
         if(request.getParameter("op").equals("Like")){
             sharingGateway.addLike(request.getParameter("uid"),request.getParameter("sid"));
             System.out.println("addling like for uid:"+request.getParameter("uid")+"sid: "+request.getParameter("sid"));
             }
+         if(request.getParameter("op").equals("DisLike")){
+            sharingGateway.addDisLike(request.getParameter("uid"),request.getParameter("sid"));
+            System.out.println("addling dislike for uid:"+request.getParameter("uid")+"sid: "+request.getParameter("sid"));
+            }
        
         int feedback=9;
         if(request.getParameter("op").equals("addFriend")){
+            System.out.println("User ID:"+userSession.getAttribute("regId").toString()+"; Friend Id:"+request.getParameter("frndId"));
         feedback=userGateway.addFriend(Integer.parseInt(userSession.getAttribute("regId").toString()), Integer.parseInt(request.getParameter("frndId")));
         if(feedback==0){
         userSession.setAttribute("globalMessage", "Friend Added Successfully");
         }
+        }if(request.getParameter("op").equals("Logout")){
+            System.out.println("Loging Out");
+        userSession.removeAttribute("regId");
+        userSession.removeAttribute("walls");
+               RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+        dispatcher.forward(request, response);
         }
         
             //    userGateway.getRegId(request.getParameter("loginId").toString());
 
-        String regId = (String) request.getParameter("uid");
-
-        userSession.setAttribute("walls", sharingGateway.getWalls(regId));
+         //(String) request.getParameter("uid");
+        String regId =userSession.getAttribute("regId").toString();
+        
+        userSession.setAttribute("walls", sharingGateway.getWalls(regId,"ALL"));
 
 //            url = basePath + "/message.jsp?messageToDisplay=You have been registered successfully.";
 //            response.sendRedirect(url);
@@ -128,7 +141,7 @@ public class UserOperationServlet extends HttpServlet {
       //  if(regId !=null)
         sharingGateway.saveStatus(Integer.parseInt(regId),status);
         }
-        userSession.setAttribute("walls", sharingGateway.getWalls(regId));
+        userSession.setAttribute("walls", sharingGateway.getWalls(regId,"ALL"));
         
         if(request.getParameter("btnSeachProfile")!=null)
         {
